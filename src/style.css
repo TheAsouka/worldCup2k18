@@ -1,0 +1,18 @@
+.maintitle{
+    margin: auto;
+    text-align: center;
+    border: 3px solid rgb(1, 138, 138);
+    background-color: blanchedalmond;
+}
+
+.groups{
+    border: 3px solid rgb(1, 138, 138);
+    background-color: rgb(253, 143, 143);
+    width: 5%;
+}
+
+.teams{
+    border: 3px solid rgb(1, 138, 138);
+    background-color: rgb(246, 253, 143);
+    width: 15%;
+}
