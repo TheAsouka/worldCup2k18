@@ -7,6 +7,8 @@ var y = 0;
 txt += "<tr><th>Group " + letters[y].toUpperCase() + "</tr></th>";
 txt += "<tr> <th>Date</th> <th>Home</th> <th>Away</th> </tr>";
 
+var dat = json_obj.groups.a.matches[0].date;
+console.log(Date.parse(dat));
 
 console.log()
 

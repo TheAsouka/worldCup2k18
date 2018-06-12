@@ -18,5 +18,3 @@ for (var i = 0; i < json_obj.teams.length; i++) {
     }
     teamsArray.push(team);
 }
-
-console.log(teamsArray[1].name);
