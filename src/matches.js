@@ -22,10 +22,6 @@ for (var i = 0; i < 6; i++) {
         i = 0;
         txt += "<tr><th>Group " + lettersLower[y].toUpperCase() + "</tr></th>";
         txt += "<tr> <th>Date</th> <th>Home</th> <th>Away</th> </tr>";
-        txt += "<tr><td>" + eval("json_obj.groups."+lettersLower[y]+".matches["+i+"].date") + "</td>";
-        txt += "<td>" + eval("json_obj.groups."+lettersLower[y]+".matches["+i+"].home_team") + "</td>";
-        txt += "<td>" + eval("json_obj.groups."+lettersLower[y]+".matches["+i+"].away_team") + "</td>";
-        txt += "</tr>";
     }
 }
 document.getElementById("outputM").innerHTML = txt;
