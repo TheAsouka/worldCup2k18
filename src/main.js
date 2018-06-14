@@ -10,7 +10,7 @@ var letters = ["a","b","c","d","e","f","g","h"];
 
 var teamsArray = [{"empty":true},]; //Permits to match index of this tab with id of teams
 
-for (var i = 0; i < json_obj.teams.length; i++) {
+for (var i = 0; i < json_obj.teams.length; i++) { // au lieu de faire ça, rajouter un element au debut dans json_obj ?
     var team = {
         "name":json_obj.teams[i].name,
         "flag":json_obj.teams[i].emojiString,
