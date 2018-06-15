@@ -5,13 +5,20 @@ var y = 0;
 
 var matchsArray = [];
 
-txt += "<tr><th>Group " + letters[y].toUpperCase() + "</tr></th>";
-txt += "<tr> <th>Date</th> <th>Home</th> <th>Score</th> <th>Away</th> </tr>";
+//txt += "<tr><th>Group " + letters[y].toUpperCase() + "</tr></th>";
+//txt += "<tr> <th>Date</th> <th>Home</th> <th>Score</th> <th>Away</th> </tr>";
 
 
 console.log()
 
 for (var i = 0; i < 6; i++) {
+
+    if(i == 5 && y < 7){
+        y += 1;
+        i = 0;
+        //txt += "<tr><th>Group " + letters[y].toUpperCase() + "</tr></th>";
+        //txt += "<tr> <th>Date</th> <th>Home</th> <th>Score</th> <th>Away</th> </tr>";
+    } 
 
     var dateForm = new Date(eval("json_obj.groups."+letters[y]+".matches["+i+"].date"));
     var date = dateForm.toLocaleString();
@@ -42,19 +49,43 @@ for (var i = 0; i < 6; i++) {
     txt += teamsArray[eval("json_obj.groups."+letters[y]+".matches["+i+"].away_team")].name + "</td>";
     txt += "</tr>"; */
 
-    if(i == 5 && y < 7){
-        y += 1;
-        i = 0;
-        txt += "<tr><th>Group " + letters[y].toUpperCase() + "</tr></th>";
-        txt += "<tr> <th>Date</th> <th>Home</th> <th>Score</th> <th>Away</th> </tr>";
-    } 
 }
+
 matchsArray.sort();
+//array.sortBy(function(o){ return o.date });
 console.log(matchsArray);
 
+//var i_day = 15;
+//var date = i_day.toString() + "/06/2018";
+
+
 function estDate(match) {
-    return match.date === "15/06/2018";
+    if (match.date == date) {
+        hour = match.hour;
+        console.log(hour);
+    }
 }
-console.log(matchsArray.find(estDate)); // trouver des objects en fonction de leur date , dans le but de lister les matchs en fonction
+
+for (var i = 0; i < matchsArray.length; i++){
+    console.log("ahah"+matchsArray[i].hour);
+}
+
+for (var i_day = 14; i_day < 29; i_day++){
+    var date = i_day.toString() + "/06/2018";
+    matchsArray.find(estDate);
+    //console.log(date);
+    //console.log(matchsArray.find(estDate));
+
+    txt += "<tr><th>" + date + "</tr></th>";
+    txt += "<tr> <th>Hour</th> <th>Home</th> <th>Score</th> <th>Away</th> </tr>";
+    txt += "<tr> <td>"+ hour + "</td>"
+    txt += "<td>"+ matchsArray.home_team + "</td></tr>"
+}
+
+
+
+
+
+ // trouver des objects en fonction de leur date , dans le but de lister les matchs en fonction
 
 document.getElementById("outputM").innerHTML = txt;
