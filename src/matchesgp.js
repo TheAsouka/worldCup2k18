@@ -5,19 +5,13 @@ var y = 0;
 
 var matchsArray = [];
 
-//txt += "<tr><th>Group " + letters[y].toUpperCase() + "</tr></th>";
-//txt += "<tr> <th>Date</th> <th>Home</th> <th>Score</th> <th>Away</th> </tr>";
-
-
 console.log()
 
-for (var i = 0; i < 6; i++) {
+for (var i = 0; i < 6; i++) { // Parcourir un tableau
 
-    if(i == 5 && y < 7){
-        y += 1;
+    if(i == 5 && y < 7){ // Parcourir tout les tableaux
+        y += 1; 
         i = 0;
-        //txt += "<tr><th>Group " + letters[y].toUpperCase() + "</tr></th>";
-        //txt += "<tr> <th>Date</th> <th>Home</th> <th>Score</th> <th>Away</th> </tr>";
     } 
 
     var dateForm = new Date(eval("json_obj.groups."+letters[y]+".matches["+i+"].date"));
@@ -35,25 +29,13 @@ for (var i = 0; i < 6; i++) {
     }
 
     matchsArray.push(match);
-
-
-/*  txt += "<tr><td>" + dateForm.toLocaleString() + "</td>"; // eval c'est le mal
-
-    txt += "<td>"+ teamsArray[eval("json_obj.groups."+letters[y]+".matches["+i+"].home_team")].flag + " ";
-    txt += teamsArray[eval("json_obj.groups."+letters[y]+".matches["+i+"].home_team")].name + "</td>";
-
-    txt += "<td>" + eval("json_obj.groups."+letters[y]+".matches["+i+"].home_result") + " - ";
-    txt += eval("json_obj.groups."+letters[y]+".matches["+i+"].away_result") + "</td>";
-
-    txt += "<td>" + teamsArray[eval("json_obj.groups."+letters[y]+".matches["+i+"].away_team")].flag + " ";
-    txt += teamsArray[eval("json_obj.groups."+letters[y]+".matches["+i+"].away_team")].name + "</td>";
-    txt += "</tr>"; */
-
 }
 
 matchsArray.sort();
 console.log(matchsArray);
 
+red = "rgb(218, 67, 67)";
+green = "rgb(118, 212, 99)";
 
 for (var i_day = 14; i_day < 29; i_day++){
     var date = i_day.toString() + "/06/2018";
@@ -62,19 +44,39 @@ for (var i_day = 14; i_day < 29; i_day++){
 
     for (var i = 0; i < matchsArray.length; i++){
         if (matchsArray[i].date == date){
-            //matchsArray.find(estDate);
-            txt += "<tr> <td>"+ matchsArray[i].hour + "</td>"
-            txt += "<td>"+ matchsArray[i].home_flag + " " + matchsArray[i].home_team + "</td>"
-            txt += "<td>"+ matchsArray[i].home_result + " - " + matchsArray[i].away_result + "</td>"
-            txt += "<td>"+ matchsArray[i].away_flag + " " + matchsArray[i].away_team + "</td></tr>"
+
+            txt += "<tr> <td>"+ matchsArray[i].hour + "</td>";
+            
+            if (matchsArray[i].home_result > matchsArray[i].away_result) {
+                txt += "<td bgcolor='rgb(118, 212, 99)'>"+ matchsArray[i].home_flag + " " + matchsArray[i].home_team + "</td>";
+                txt += "<td>"+ matchsArray[i].home_result + " - " + matchsArray[i].away_result + "</td>";
+                txt += "<td>"+ matchsArray[i].away_flag + " " + matchsArray[i].away_team + "</td></tr>";
+
+                var rezult = teamsArray.find(function(element) {
+                    if (element.name == matchsArray[i].home_team ){
+                        console.log(element.name);
+                        element.points += 3;
+                    }
+                })
+            }
+            else if(matchsArray[i].away_result > matchsArray[i].home_result){
+                txt += "<td>"+ matchsArray[i].home_flag + " " + matchsArray[i].home_team + "</td>";
+                txt += "<td>"+ matchsArray[i].home_result + " - " + matchsArray[i].away_result + "</td>";
+                txt += "<td bgcolor='rgb(118, 212, 99)'>"+ matchsArray[i].away_flag + " " + matchsArray[i].away_team + "</td></tr>";
+            }
+            else{
+                txt += "<td>"+ matchsArray[i].home_flag + " " + matchsArray[i].home_team + "</td>";
+                txt += "<td>"+ matchsArray[i].home_result + " - " + matchsArray[i].away_result + "</td>";
+                txt += "<td>"+ matchsArray[i].away_flag + " " + matchsArray[i].away_team + "</td></tr>";
+            }
+
+            
+            
         }
+        
     }
 
-    txt += "<td>"+ matchsArray.home_team + "</td></tr>"
 }
-
-
-
 
 
  // trouver des objects en fonction de leur date , dans le but de lister les matchs en fonction

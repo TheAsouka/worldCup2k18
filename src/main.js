@@ -14,7 +14,11 @@ for (var i = 0; i < json_obj.teams.length; i++) { // au lieu de faire ça, rajou
     var team = {
         "name":json_obj.teams[i].name,
         "flag":json_obj.teams[i].emojiString,
-        "id":json_obj.teams[i].id
+        "id":json_obj.teams[i].id,
+        "wins":0,
+        "loses":0,
+        "draws":0,
+        "points":0,
     }
     teamsArray.push(team);
 }
