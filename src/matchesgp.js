@@ -52,33 +52,24 @@ for (var i = 0; i < 6; i++) {
 }
 
 matchsArray.sort();
-//array.sortBy(function(o){ return o.date });
 console.log(matchsArray);
 
-//var i_day = 15;
-//var date = i_day.toString() + "/06/2018";
-
-
-function estDate(match) {
-    if (match.date == date) {
-        hour = match.hour;
-        console.log(hour);
-    }
-}
-
-for (var i = 0; i < matchsArray.length; i++){
-    console.log("ahah"+matchsArray[i].hour);
-}
 
 for (var i_day = 14; i_day < 29; i_day++){
     var date = i_day.toString() + "/06/2018";
-    matchsArray.find(estDate);
-    //console.log(date);
-    //console.log(matchsArray.find(estDate));
-
     txt += "<tr><th>" + date + "</tr></th>";
     txt += "<tr> <th>Hour</th> <th>Home</th> <th>Score</th> <th>Away</th> </tr>";
-    txt += "<tr> <td>"+ hour + "</td>"
+
+    for (var i = 0; i < matchsArray.length; i++){
+        if (matchsArray[i].date == date){
+            //matchsArray.find(estDate);
+            txt += "<tr> <td>"+ matchsArray[i].hour + "</td>"
+            txt += "<td>"+ matchsArray[i].home_flag + " " + matchsArray[i].home_team + "</td>"
+            txt += "<td>"+ matchsArray[i].home_result + " - " + matchsArray[i].away_result + "</td>"
+            txt += "<td>"+ matchsArray[i].away_flag + " " + matchsArray[i].away_team + "</td></tr>"
+        }
+    }
+
     txt += "<td>"+ matchsArray.home_team + "</td></tr>"
 }
 
@@ -87,5 +78,4 @@ for (var i_day = 14; i_day < 29; i_day++){
 
 
  // trouver des objects en fonction de leur date , dans le but de lister les matchs en fonction
-
 document.getElementById("outputM").innerHTML = txt;
