@@ -34,9 +34,6 @@ for (var i = 0; i < 6; i++) { // Parcourir un tableau
 matchsArray.sort();
 console.log(matchsArray);
 
-red = "rgb(218, 67, 67)";
-green = "rgb(118, 212, 99)";
-
 for (var i_day = 14; i_day < 29; i_day++){
     var date = i_day.toString() + "/06/2018";
     txt += "<tr><th>" + date + "</tr></th>";
@@ -53,7 +50,11 @@ for (var i_day = 14; i_day < 29; i_day++){
                 txt += "<td>"+ matchsArray[i].away_flag + " " + matchsArray[i].away_team + "</td></tr>";
 
                 var rezult = teamsArray.find(function(element) {
-                    if (element.name == matchsArray[i].home_team ){
+                    var z = 0;
+                    if (i > 0){
+                        z = i - 1;
+                    }
+                    if (element.name == matchsArray[z].home_team ){
                         console.log(element.name);
                         element.points += 3;
                     }
@@ -63,6 +64,17 @@ for (var i_day = 14; i_day < 29; i_day++){
                 txt += "<td>"+ matchsArray[i].home_flag + " " + matchsArray[i].home_team + "</td>";
                 txt += "<td>"+ matchsArray[i].home_result + " - " + matchsArray[i].away_result + "</td>";
                 txt += "<td bgcolor='rgb(118, 212, 99)'>"+ matchsArray[i].away_flag + " " + matchsArray[i].away_team + "</td></tr>";
+
+                var rez = teamsArray.find(function(element) {
+                    var z = 0;
+                    if (i > 0){
+                        z = i - 1;
+                    }
+                    if (element.name == matchsArray[z].away_team ){
+                        console.log(element.name);
+                        element.points += 3;
+                    }
+                })
             }
             else{
                 txt += "<td>"+ matchsArray[i].home_flag + " " + matchsArray[i].home_team + "</td>";
@@ -80,4 +92,7 @@ for (var i_day = 14; i_day < 29; i_day++){
 
 
  // trouver des objects en fonction de leur date , dans le but de lister les matchs en fonction
-document.getElementById("outputM").innerHTML = txt;
+if (document.getElementById("outputM") != null){
+    document.getElementById("outputM").innerHTML = txt;
+}
+
