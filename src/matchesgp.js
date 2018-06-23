@@ -5,6 +5,12 @@ var y = 0;
 
 var matchsArray = [];
 
+function Update(keyValue, newKey, newValue)
+{
+  keyValue.Key = newKey;
+  keyValue.Value = newValue; 
+}
+
 console.log()
 
 for (var i = 0; i < 6; i++) { // Parcourir un tableau
@@ -49,32 +55,26 @@ for (var i_day = 14; i_day < 29; i_day++){
                 txt += "<td>"+ matchsArray[i].home_result + " - " + matchsArray[i].away_result + "</td>";
                 txt += "<td>"+ matchsArray[i].away_flag + " " + matchsArray[i].away_team + "</td></tr>";
 
-                var rezult = teamsArray.find(function(element) {
-                    var z = 0;
-                    if (i > 0){
-                        z = i - 1;
+                var indexWinner = teamsArray.findIndex(function(element) {
+                    if (element.name == matchsArray[i].home_team ){
+                        return element.name;
                     }
-                    if (element.name == matchsArray[z].home_team ){
-                        console.log(element.name);
-                        element.points += 3;
-                    }
-                })
+                });
+                console.log(indexWinner);
+                teamsArray[indexWinner].points += 3;
             }
             else if(matchsArray[i].away_result > matchsArray[i].home_result){
                 txt += "<td>"+ matchsArray[i].home_flag + " " + matchsArray[i].home_team + "</td>";
                 txt += "<td>"+ matchsArray[i].home_result + " - " + matchsArray[i].away_result + "</td>";
                 txt += "<td bgcolor='rgb(118, 212, 99)'>"+ matchsArray[i].away_flag + " " + matchsArray[i].away_team + "</td></tr>";
 
-                var rez = teamsArray.find(function(element) {
-                    var z = 0;
-                    if (i > 0){
-                        z = i - 1;
+                var indexWinner = teamsArray.findIndex(function(element) {
+                    if (element.name == matchsArray[i].home_team ){
+                        return element.name;
                     }
-                    if (element.name == matchsArray[z].away_team ){
-                        console.log(element.name);
-                        element.points += 3;
-                    }
-                })
+                });
+                console.log(indexWinner);
+                teamsArray[indexWinner].points += 3; // wtf ? pourquoi toujours decallage ??
             }
             else{
                 txt += "<td>"+ matchsArray[i].home_flag + " " + matchsArray[i].home_team + "</td>";
