@@ -4,7 +4,7 @@ var txt = "";
 var roundArray = ["round_16","round_8","round_4","round_2"]; // Tant pis pour la 3rd Place c'est chiant, l'API fournit pas les loser des matchs donc flemme
 var matchesArray = [];
 
-for (var j = 0; j < roundArray.length; j++){
+for (var j = 0; j < roundArray.length; j++){ //Create an array that contains match name (id) & the winner of the match
     for (var i = 0; i < eval("json_obj.knockout." + roundArray[j] + ".matches.length"); i++){
 
         var idMatch = eval("json_obj.knockout." + roundArray[j] + ".matches[i].name");
@@ -42,7 +42,7 @@ for (var j = 0; j < roundArray.length; j++){
             txt += "<td>" + teamsArray[idHome].name + "</td>";
         }
         else if (Number.isInteger(idHome) && idHome > 48){ // Premier match bracket 49
-            txt += "<td>" + "Winner of match " + searchHome.id + " " + searchHome.winner + "</td>"; // Probleme pour la 3rd place, mais osef des losers
+            txt += "<td>" + "Winner " + searchHome.id + " " + searchHome.winner + "</td>"; // Probleme pour la 3rd place, mais osef des losers
         }
         else{
             txt += "<td>" + idHome + "</td>";
@@ -54,7 +54,7 @@ for (var j = 0; j < roundArray.length; j++){
             txt += "<td>" + teamsArray[idAway].name + "</td></tr>";
         }
         else if (Number.isInteger(idAway) && idAway > 48){
-            txt += "<td>" + "Winner of match " + searchAway.id + " " + searchAway.winner + "</td>";
+            txt += "<td>" + "Winner " + searchAway.id + " " + searchAway.winner + "</td>";
         }
         else{
             txt += "<td>" + idAway + "</td></tr>";
