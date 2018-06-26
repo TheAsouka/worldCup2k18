@@ -11,8 +11,6 @@ function Update(keyValue, newKey, newValue)
   keyValue.Value = newValue; 
 }
 
-console.log()
-
 for (var i = 0; i < 6; i++) { // Parcourir un tableau
 
     if(i == 5 && y < 7){ // Parcourir tout les tableaux
