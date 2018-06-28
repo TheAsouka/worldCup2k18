@@ -1,4 +1,4 @@
-console.log(json_obj);
+//console.log(json_obj);
 
 var txt = "";
 var y = 0;
@@ -30,7 +30,7 @@ for (var i = 0; i < 6; i++) { // Parcourir un tableau
 }
 
 matchsArray.sort();
-console.log(matchsArray);
+//console.log(matchsArray);
 
 for (var i_day = 14; i_day < 29; i_day++){
     var date = i_day.toString() + "/06/2018";
@@ -40,44 +40,45 @@ for (var i_day = 14; i_day < 29; i_day++){
     for (var i = 0; i < matchsArray.length; i++){
         if (matchsArray[i].date == date){
 
+            //match winner of the match with his place in teamsArray
+            var indexHome = teamsArray.find(function(element) {if (element.name == matchsArray[i].home_team ){return element;}});
+            var indexAway = teamsArray.find(function(element) {if (element.name == matchsArray[i].away_team ){return element;}});
+
             txt += "<tr> <td>"+ matchsArray[i].hour + "</td>";
             
             if (matchsArray[i].home_result > matchsArray[i].away_result) {
                 txt += "<td bgcolor='rgb(118, 212, 99)'>"+ matchsArray[i].home_flag + " " + matchsArray[i].home_team + "</td>";
                 txt += "<td>"+ matchsArray[i].home_result + " - " + matchsArray[i].away_result + "</td>";
-                txt += "<td>"+ matchsArray[i].away_flag + " " + matchsArray[i].away_team + "</td></tr>";
+                txt += "<td bgcolor='#e05555'>"+ matchsArray[i].away_flag + " " + matchsArray[i].away_team + "</td></tr>";
 
-                var indexWinner = teamsArray.find(function(element) {
-                    if (element.name == matchsArray[i].home_team ){
-                        return element;
-                    }
-                });
-                console.log(indexWinner.name);
-                indexWinner.points += 3;
+                indexHome.points += 3;
+                indexHome.wins += 1;
+                indexAway.loses += 1;
 
 
             }
             else if(matchsArray[i].away_result > matchsArray[i].home_result){
-                txt += "<td>"+ matchsArray[i].home_flag + " " + matchsArray[i].home_team + "</td>";
+                txt += "<td bgcolor='#e05555'>"+ matchsArray[i].home_flag + " " + matchsArray[i].home_team + "</td>";
                 txt += "<td>"+ matchsArray[i].home_result + " - " + matchsArray[i].away_result + "</td>";
                 txt += "<td bgcolor='rgb(118, 212, 99)'>"+ matchsArray[i].away_flag + " " + matchsArray[i].away_team + "</td></tr>";
 
-                var indexWinner = teamsArray.find(function(element) {
-                    if (element.name == matchsArray[i].away_team ){
-                        return element;
-                    }
-                });
-                console.log(indexWinner.name);
-                indexWinner.points += 3; // wtf ? pourquoi toujours decallage ??
+                indexAway.points += 3; // wtf ? pourquoi toujours decallage ??
+                indexAway.wins += 1; // décallage de 1 car teamsArray[0] ne sert a rien, il faudrait faire un [i - 1]
+                indexHome.loses += 1;
             }
             else{
-                txt += "<td>"+ matchsArray[i].home_flag + " " + matchsArray[i].home_team + "</td>";
+                txt += "<td bgcolor='#2b97df'>"+ matchsArray[i].home_flag + " " + matchsArray[i].home_team + "</td>";
                 txt += "<td>"+ matchsArray[i].home_result + " - " + matchsArray[i].away_result + "</td>";
-                txt += "<td>"+ matchsArray[i].away_flag + " " + matchsArray[i].away_team + "</td></tr>";
-            }
+                txt += "<td bgcolor='#2b97df'>"+ matchsArray[i].away_flag + " " + matchsArray[i].away_team + "</td></tr>";
 
-            
-            
+                if (matchsArray[i].home_result != null){
+
+                    indexHome.points += 1;
+                    indexHome.draws += 1;
+                    indexAway.points += 1;
+                    indexAway.draws += 1;
+                }
+            }
         }
         
     }
